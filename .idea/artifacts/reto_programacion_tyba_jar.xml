@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="reto_programacion_tyba:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/reto_programacion_tyba_jar</output-path>
+    <root id="archive" name="reto_programacion_tyba.jar">
+      <element id="module-output" name="reto_programacion_tyba" />
+    </root>
+  </artifact>
+</component>
