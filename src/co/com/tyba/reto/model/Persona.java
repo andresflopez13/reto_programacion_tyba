@@ -7,11 +7,11 @@ public class Persona {
     private String contrasenia;
     private double inversion;
 
-    public Persona(String nombre, String tipoDocumento, String numeroDocumento, String contraseña, double inversion) {
+    public Persona(String nombre, String tipoDocumento, String numeroDocumento, String contrasenia, double inversion) {
         this.nombre = nombre;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
-        this.contrasenia = contraseña;
+        this.contrasenia = contrasenia;
         this.inversion = inversion;
     }
 

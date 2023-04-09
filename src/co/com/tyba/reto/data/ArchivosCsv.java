@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArchivosCsv {
-    Scanner sc = new Scanner(System.in);
 
     public void escribirArchivoPersonas(ArrayList<Persona> personas){
         String directorio = System.getProperty("user.dir")+"recursos";
@@ -50,7 +49,7 @@ public class ArchivosCsv {
             while (scannerFile.hasNextLine()){
                 datos = scannerFile.nextLine().split(";");
                 producto = new Producto(datos[0],Double.parseDouble(datos[1]),Double.parseDouble(datos[2]),
-                        Float.parseFloat(datos[3]));
+                        Float.parseFloat(datos[3]), datos[4]);
                 productos.add(producto);
             }
         } catch (FileNotFoundException e) {

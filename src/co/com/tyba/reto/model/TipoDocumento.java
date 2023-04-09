@@ -17,7 +17,7 @@ public class TipoDocumento {
         this.nombre = nombre;
     }
 
-    public boolean isInvertir() {
+    public boolean getInvertir() {
         return invertir;
     }
 

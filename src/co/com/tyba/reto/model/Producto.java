@@ -7,11 +7,14 @@ public class Producto {
     private double maximo;
     private float ganancia;
 
-    public Producto(String nombre, double minimo, double maximo, float ganancia) {
+    private String imagen;
+
+    public Producto(String nombre, double minimo, double maximo, float ganancia, String imagen) {
         this.nombre = nombre;
         this.minimo = minimo;
         this.maximo = maximo;
         this.ganancia = ganancia;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -46,6 +49,14 @@ public class Producto {
         this.ganancia = ganancia;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -53,6 +64,7 @@ public class Producto {
                 ", minimo=" + minimo +
                 ", maximo=" + maximo +
                 ", ganancia=" + ganancia +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 }

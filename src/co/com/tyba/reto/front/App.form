@@ -12,7 +12,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="e82be" class="javax.swing.JLabel" binding="title">
+      <component id="e82be" class="javax.swing.JLabel" binding="titleApp">
         <constraints>
           <grid row="1" column="1" row-span="2" col-span="6" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -48,7 +48,7 @@
       </vspacer>
       <component id="b1cc" class="javax.swing.JButton" binding="buttonLogin">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-14903166"/>
@@ -64,7 +64,7 @@
       </component>
       <component id="c896e" class="javax.swing.JTextField" binding="textUsuario">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -73,9 +73,9 @@
           <toolTipText value="Usuario"/>
         </properties>
       </component>
-      <component id="c53bd" class="javax.swing.JTextField" binding="textContraseña">
+      <component id="c53bd" class="javax.swing.JTextField" binding="textContrasenia">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -128,11 +128,6 @@
           <text value="¿No tienes cuenta?"/>
         </properties>
       </component>
-      <hspacer id="e3848">
-        <constraints>
-          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <vspacer id="a60e5">
         <constraints>
           <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -148,11 +143,6 @@
           <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <hspacer id="6ba24">
-        <constraints>
-          <grid row="10" column="4" row-span="1" col-span="3" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <component id="fa5df" class="javax.swing.JButton" binding="verificarLosFondosDeButton" default-binding="true">
         <constraints>
           <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -160,6 +150,14 @@
         <properties>
           <hideActionText value="false"/>
           <text value="Verificar los fondos de inversión"/>
+        </properties>
+      </component>
+      <component id="60c96" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
         </properties>
       </component>
     </children>

@@ -1,11 +1,14 @@
 package co.com.tyba.reto.front;
 
 import co.com.tyba.reto.data.ArchivosCsv;
+import co.com.tyba.reto.model.Producto;
 import co.com.tyba.reto.model.TipoDocumento;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Consulta extends JFrame{
@@ -17,22 +20,56 @@ public class Consulta extends JFrame{
     private JLabel Producto;
     private JLabel Rentabilidad;
     private JLabel Ganancia;
-
-    private ArchivosCsv archivosCsv = new ArchivosCsv();
+    private JLabel imageProducto;
+    private JButton ButtonVolver;
+    private final ArrayList<Producto> productos;
+    private ArrayList<TipoDocumento> tiposDocumentos;
+    private final DecimalFormat formato = new DecimalFormat("#,###");
 
     public Consulta(String nombre, String tipoDocumento){
         setContentPane(PanelConsulta);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         textFieldNombre.setText(nombre);
+        ArchivosCsv archivosCsv = new ArchivosCsv();
+        productos = archivosCsv.leerArchivoProductos();
+        tiposDocumentos = archivosCsv.leerArchivoTiposDocumentos();
         llenarSeleccionar();
         comboBoxTipoDocumento.setSelectedItem(tipoDocumento);
         pack();
 
-        consultarButton.addActionListener(new ActionListener() {
+        consultarButton.addActionListener(e -> {
+            if (verificacionCampos()){
+                Producto producto=recomendacionProducto(Double.parseDouble(textFieldMonto.getText()));
+                if (producto == null){
+                    textFieldMonto.setText("");
+                    Producto.setText("");
+                    Rentabilidad.setText("");
+                    Ganancia.setText("");
+                    ImageIcon icon = new ImageIcon(new ImageIcon("src/co/com/tyba/reto/" +
+                            "imagenes/cargando.png").getImage()
+                            .getScaledInstance(60,60, Image.SCALE_DEFAULT));
+                    imageProducto.setIcon(icon);
+                }else {
+                    JOptionPane.showMessageDialog(PanelConsulta,textFieldNombre.getText()+
+                            " la siguiente es la recomendación que tenemos para usted según los datos ingresados");
+                    Producto.setText(producto.getNombre());
+                    Rentabilidad.setText(String.valueOf(producto.getGanancia()) + "%");
+                    Ganancia.setText("$"+formato.format(Math.round(Double.parseDouble(textFieldMonto.getText())
+                            * (producto.getGanancia()/100))));
+                    ImageIcon icon = new ImageIcon(new ImageIcon("src/co/com/tyba/reto/imagenes/"+
+                            producto.getImagen() +".png").getImage()
+                            .getScaledInstance(250,120, Image.SCALE_DEFAULT));
+                    imageProducto.setIcon(icon);
+                }
+            }
+        });
+        ButtonVolver.addActionListener(e -> volver());
+        textFieldMonto.addKeyListener(new KeyAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (verificacionCampos()){
-                    System.out.println("A calcular todo");
+            public void keyTyped(KeyEvent e) {
+                if (textFieldMonto.getText().length() >= 1) {
+                    textFieldMonto.setText(formato.format(Integer.valueOf(textFieldMonto.getText()
+                            .replace(".", "").replace(",", ""))) );
                 }
             }
         });
@@ -46,21 +83,60 @@ public class Consulta extends JFrame{
         }else if(comboBoxTipoDocumento.getSelectedItem()==null||
                 comboBoxTipoDocumento.getSelectedItem().toString().isEmpty()){
             JOptionPane.showMessageDialog(PanelConsulta,"Por favor seleccione un tipo de documento");
-        }else if (textFieldMonto.getText()==null||textFieldMonto.getText().isEmpty()||
-                !textFieldMonto.getText().matches("[0-9]+")){
-            textFieldMonto.setText("");
-            JOptionPane.showMessageDialog(PanelConsulta,"Por favor ingrese un monto valido");
-        }else{
-            return true;
+        }else if(verificarTipoDocumento()){
+            if(textFieldMonto.getText()==null||textFieldMonto.getText().isEmpty()||
+                    !textFieldMonto.getText().matches("[0-9]+")){
+                textFieldMonto.setText("");
+                JOptionPane.showMessageDialog(PanelConsulta,"Por favor ingrese un monto valido");
+            }else{
+                return true;
+            }
+        }else {
+            JOptionPane.showMessageDialog(PanelConsulta,"Por su tipo de documento no puede invertir " +
+                    "en el momento");
+            volver();
         }
+
         return false;
     }
 
     public void llenarSeleccionar(){
-        ArrayList<TipoDocumento> tiposDocumentos = archivosCsv.leerArchivoTiposDocumentos();
         comboBoxTipoDocumento.addItem("");
         for (TipoDocumento tipoDocumento: tiposDocumentos){
             comboBoxTipoDocumento.addItem(tipoDocumento.getNombre());
         }
+    }
+
+    public Producto recomendacionProducto(double monto){
+        for (Producto producto : productos){
+            if (200000<=monto){
+                if (producto.getMinimo()<=monto){
+                    if (producto.getMaximo()>monto){
+                       return producto;
+                    }
+                }
+            }else {
+                JOptionPane.showMessageDialog(PanelConsulta,"La inversión minima debe ser de $200.000");
+                return null;
+            }
+        }
+        JOptionPane.showMessageDialog(PanelConsulta,"Por favor no ingrese números tan grandes que " +
+                "usted no tiene tanta plata");
+        return null;
+    }
+
+    public boolean verificarTipoDocumento(){
+        for (TipoDocumento tipoDocumento : tiposDocumentos){
+            if (tipoDocumento.getNombre().equals(comboBoxTipoDocumento.getSelectedItem())){
+                return tipoDocumento.getInvertir();
+            }
+        }
+        return false;
+    }
+
+    public void volver(){
+        JFrame frame = new App();
+        frame.setSize(450,550);
+        frame.setVisible(true);
     }
 }
