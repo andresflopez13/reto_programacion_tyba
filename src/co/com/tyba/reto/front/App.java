@@ -2,8 +2,6 @@ package co.com.tyba.reto.front;
 
 import co.com.tyba.reto.data.ArchivosCsv;
 import co.com.tyba.reto.model.Persona;
-import co.com.tyba.reto.model.Producto;
-import co.com.tyba.reto.model.TipoDocumento;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +16,7 @@ public class App extends JFrame{
     private JButton buttonLogin;
     private JLabel candado;
     private JLabel sobre;
+    private JButton verificarLosFondosDeButton;
 
     private static ArrayList<Persona> personas;
 
@@ -40,6 +39,16 @@ public class App extends JFrame{
                     System.out.println("El usuario no existe....");
                 }
 
+            }
+        });
+
+        verificarLosFondosDeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new Consulta("","");
+                frame.setSize(300,500);
+                frame.setVisible(true);
+                dispose();
             }
         });
     }
