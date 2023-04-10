@@ -6,8 +6,6 @@ import co.com.tyba.reto.model.TipoDocumento;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ public class Consulta extends JFrame{
     private JLabel imageProducto;
     private JButton ButtonVolver;
     private final ArrayList<Producto> productos;
-    private ArrayList<TipoDocumento> tiposDocumentos;
+    private final ArrayList<TipoDocumento> tiposDocumentos;
     private final DecimalFormat formato = new DecimalFormat("#,###");
 
     public Consulta(String nombre, String tipoDocumento){
@@ -53,7 +51,7 @@ public class Consulta extends JFrame{
                     JOptionPane.showMessageDialog(PanelConsulta,textFieldNombre.getText()+
                             " la siguiente es la recomendación que tenemos para usted según los datos ingresados");
                     Producto.setText(producto.getNombre());
-                    Rentabilidad.setText(String.valueOf(producto.getGanancia()) + "%");
+                    Rentabilidad.setText((producto.getGanancia()) + "%");
                     Ganancia.setText("$"+formato.format(Math.round(Double.parseDouble(textFieldMonto.getText())
                             * (producto.getGanancia()/100))));
                     ImageIcon icon = new ImageIcon(new ImageIcon("src/co/com/tyba/reto/imagenes/"+
@@ -64,15 +62,6 @@ public class Consulta extends JFrame{
             }
         });
         ButtonVolver.addActionListener(e -> volver());
-        textFieldMonto.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (textFieldMonto.getText().length() >= 1) {
-                    textFieldMonto.setText(formato.format(Integer.valueOf(textFieldMonto.getText()
-                            .replace(".", "").replace(",", ""))) );
-                }
-            }
-        });
     }
 
     public boolean verificacionCampos(){
